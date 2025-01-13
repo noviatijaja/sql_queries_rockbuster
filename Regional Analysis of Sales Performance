@@ -1,0 +1,13 @@
+SELECT
+    e.country,
+    SUM(d.amount) AS total_payment
+FROM
+    customer a
+JOIN address b ON a.address_id = b.address_id
+JOIN city c ON b.city_id = c.city_id
+JOIN country e ON c.country_id = e.country_id
+JOIN payment d ON a.customer_id = d.customer_id
+GROUP BY
+    e.country
+ORDER BY
+    SUM(d.amount) DESC;

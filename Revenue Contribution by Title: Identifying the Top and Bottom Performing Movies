@@ -1,0 +1,13 @@
+SELECT
+    a.title AS movie_title,
+    COUNT(c.rental_id) AS total_rentals,
+    SUM(d.amount) AS total_revenue
+FROM
+    film a
+JOIN inventory b ON a.film_id = b.film_id
+JOIN rental c ON b.inventory_id = c.inventory_id
+JOIN payment d ON c.rental_id = d.rental_id
+GROUP BY
+    a.title
+ORDER BY
+    SUM(d.amount) DESC;
